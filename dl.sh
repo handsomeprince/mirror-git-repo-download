@@ -15,7 +15,11 @@ do
 			echo -e "\033[31merror:\t`pwd`\tmaybe is not a normal git bare repository\033[0m"
 			echo -e "\033[31merror:\t`pwd`\tmaybe is not a normal git bare repository\033[0m" > ../sync.log
 		else
-			git repack -a -b -d
+			countObject=`ls ./objects/pack|wc -l`
+			if (($countObject > 3))
+			then
+				git repack -a -b -d
+			fi
 		fi
 		cd ..
 	fi
