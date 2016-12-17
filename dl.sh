@@ -9,7 +9,7 @@ do
 		git clone --mirror $line
 	else
 		cd $dir.git
-		git remote -v update
+		git remote -v update 2>/dev/null
 		if [ $? != 0 ]
 		then
 			echo -e "\033[31merror:\t`pwd`\tmaybe is not a normal git bare repository\033[0m"
