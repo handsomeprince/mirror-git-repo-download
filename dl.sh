@@ -12,13 +12,12 @@ do
 		git remote -v update
 		if [ $? != 0 ]
 		then
-			cd ..
-			rm -rf $dir.git
-			git clone --mirror $line
+			echo -e "\033[31merror:\t`pwd`\tmaybe is not a normal git bare repository\033[0m"
+			echo -e "\033[31merror:\t`pwd`\tmaybe is not a normal git bare repository\033[0m" > ../sync.log
 		else
 			git repack -a -b -d
-			cd ..
 		fi
+		cd ..
 	fi
 done
 exit 0
