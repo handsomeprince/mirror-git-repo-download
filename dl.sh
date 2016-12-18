@@ -1,14 +1,14 @@
 #!/bin/bash
 #set -e
 #set -o pipefail
-for line in `cat gnome_repo_url.txt`
+for url in `cat gnome_repo_url.txt`
 do
-	dir=`echo $line|cut -d \/ -f 5`
+	dir=`echo $url|cut -d \/ -f 5`
 	if [ ! -d $dir.git ]
 	then
 		echo -e "\033[32mCLONE $dir.git\033[0m"
 		echo -e "\033[32m------------------------------------------------\033[0m"
-		git clone --mirror $line
+		git clone --mirror $url
 	else
 		echo -e "\033[32mUPDATE $dir.git\033[0m"
 		echo -e "\033[32m------------------------------------------------\033[0m"
