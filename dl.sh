@@ -1,7 +1,12 @@
 #!/bin/bash
+#Copyright (c) 2016 Prince King <wyhddzxx2@gmail.com>
+#This file is under MIT license
+
+#requires: git
+
 #set -e
 #set -o pipefail
-for url in `cat gnome_repo_url.txt`
+for url in `cat repo_url/gnome_repo_url.txt`
 do
 	dir=`echo $url|cut -d \/ -f 5`
 	if [ ! -d $dir.git ]
