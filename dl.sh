@@ -12,7 +12,8 @@ source split.sh
 
 download_script_dir=`dirname $(realpath $0)`
 repo_url_dir="$1"
-destination_dir="$2"
+destination_dir=${2:-~}
+
 if [ ! -d $destination_dir ]
 then
 	mkdir -p $destination_dir
