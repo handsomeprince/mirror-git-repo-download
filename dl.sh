@@ -6,16 +6,22 @@
 
 #set -e
 #set -o pipefail
+
 source list_repo_url.sh
+source split.sh
+
 download_script_dir=`dirname $(realpath $0)`
 repo_url_dir="$1"
-destination_dir="s2"
-mkdir -p $destination_dir
+destination_dir="$2"
+if [ ! -d $destination_dir ]
+then
+	mkdir -p $destination_dir
+fi
 for repo_url_file in `list_repo_url $repo_url_dir`
 do
 	for url in `cat $repo_url_file`
 	do
-		dir=`echo $url|cut -d \/ -f 5`
+		dir=`split $url "/" 5`		#echo $url|cut -d \/ -f 5`
 		if [ ! -d $destination_dir/$dir.git ]
 		then
 			echo -e "\033[32mCLONE $dir.git\033[0m"

@@ -4,4 +4,5 @@ function list_repo_url(){
 	do
 		echo $line
 	done
+	return 0
 }
