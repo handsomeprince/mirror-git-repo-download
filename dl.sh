@@ -18,6 +18,11 @@ if [ ! -d $destination_dir ]
 then
 	mkdir -p $destination_dir
 fi
+
+echo "$(date)" >> $download_script_dir/sync_err.log
+echo "-------------------------------------------------" >> $download_script_dir/sync_err.log
+echo "Result\tResultCode\tLocation\t\ResultDescription" >> $download_script_dir/sync_err.log
+
 for repo_url_file in `list_repo_url $repo_url_dir`
 do
 	for url in `cat $repo_url_file`
@@ -28,6 +33,11 @@ do
 			echo -e "\033[32mCLONE $dir.git\033[0m"
 			echo -e "\033[32m------------------------------------------------\033[0m"
 			git clone --mirror $url $destination_dir/$dir.git
+			if [ $? != 0 ]
+			then
+				rm -rf $destination_dir/$dir.git >/dev/null 2>&1
+				echo -e "\033[31merror:\t1\t$destination_dir/$dir.git\tis not mirrored successfully!\033[0m" >&1 |tee -a $download_script_dir/sync_err.log
+			fi
 		else
 			echo -e "\033[32mUPDATE $dir.git\033[0m"
 			echo -e "\033[32m------------------------------------------------\033[0m"
@@ -36,7 +46,7 @@ do
 			if [ $? != 0 ]
 			then
 	#			echo -e "\033[31merror:\t`pwd`\tmaybe is not a normal git bare repository\033[0m"
-				echo -e "\033[31merror:\t`pwd`\tmaybe is not a normal git bare repository\033[0m" >&1 |tee -a $download_script_dir/sync_err.log
+				echo -e "\033[31merror:\t2\t`pwd`\tmaybe is not a normal git bare repository\033[0m" >&1 |tee -a $download_script_dir/sync_err.log
 			else
 				countObject=`ls ./objects/pack|wc -l`
 				if (($countObject > 3))
