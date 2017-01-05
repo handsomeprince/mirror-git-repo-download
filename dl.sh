@@ -19,9 +19,9 @@ then
 	mkdir -p $destination_dir
 fi
 
-echo "$(date)" >> $download_script_dir/sync_err.log
-echo "-------------------------------------------------" >> $download_script_dir/sync_err.log
-echo "Result\tResultCode\tLocation\t\ResultDescription" >> $download_script_dir/sync_err.log
+echo -e "$(date)" >> $download_script_dir/sync_err.log
+echo -e "-------------------------------------------------" >> $download_script_dir/sync_err.log
+echo -e "Result\tResultCode\tLocation\tResultDescription" >> $download_script_dir/sync_err.log
 
 for repo_url_file in `list_repo_url $repo_url_dir`
 do
@@ -56,6 +56,7 @@ do
 			fi
 			cd $download_script_dir
 		fi
+		echo -e "\033[32m------------------------------------------------\033[0m"
 		echo -e "\033[32mDONE\033[0m"
 	done
 done
