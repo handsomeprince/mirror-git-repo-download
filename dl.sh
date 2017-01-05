@@ -36,7 +36,7 @@ do
 			if [ $? != 0 ]
 			then
 				rm -rf $destination_dir/$dir.git >/dev/null 2>&1
-				echo -e "\033[31merror:\t1\t$destination_dir/$dir.git\tis not mirrored successfully!\033[0m" >&1 |tee -a $download_script_dir/sync_err.log
+				echo -e "\033[31merror:\t1\t$(realpath $destination_dir)/$dir.git\tis not mirrored successfully! \033[0m" >&1 |tee -a $download_script_dir/sync_err.log
 			fi
 		else
 			echo -e "\033[32mUPDATE $dir.git\033[0m"
