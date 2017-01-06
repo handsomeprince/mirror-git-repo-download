@@ -23,7 +23,7 @@ echo -e "$(date)" >> $download_script_dir/sync_err.log
 echo -e "-------------------------------------------------" >> $download_script_dir/sync_err.log
 echo -e "Result\tResultCode\tLocation\tResultDescription" >> $download_script_dir/sync_err.log
 
-for repo_url_file in `list_repo_url $repo_url_dir`
+for repo_url_file in `list_repo_url "$repo_url_dir"`
 do
 	for url in `cat $repo_url_file`
 	do

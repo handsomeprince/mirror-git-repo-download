@@ -8,13 +8,13 @@ function list_repo_url(){
 #		echo "Usage: list_repo_url directory1 directory2 .. directory[n]"
 		return 1
 	fi
-	local url_dirs="$@"
 	local url_dir
-	for url_dir in ${url_dirs[@]}
+	local file
+	for url_dir in "$@"
 	do
-		for line in $(ls $url_dir/*_git_repo_url.txt 2>/dev/null)
+		for file in "$url_dir"/*_git_repo_url.txt
 		do
-			echo $line
+			echo $(realpath "$file")
 		done
 	done
 	return 0
