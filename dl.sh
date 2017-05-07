@@ -48,7 +48,7 @@ do
 	#			echo -e "\033[31merror:\t`pwd`\tmaybe is not a normal git bare repository\033[0m"
 				echo -e "\033[31merror:\t2\t`pwd`\tmaybe is not a normal git bare repository\033[0m" >&1 |tee -a $download_script_dir/sync_err.log
 			else
-				countObject=`ls ./objects/pack|wc -l`
+				countObject=`ls ./objects|wc -l`
 				if (($countObject > 3))
 				then
 					git repack -a -b -d
